@@ -1,4 +1,4 @@
-package com.github.smivle.common;
+package com.github.stagirs.common;
 
 import java.security.MessageDigest;
 

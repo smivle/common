@@ -1,5 +1,6 @@
 package com.github.smivle.common.text;
 
+import com.github.stagirs.common.text.SentenceExtractor;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

@@ -15,6 +15,7 @@
  */
 package com.github.smivle.common.text;
 
+import com.github.stagirs.common.text.TextUtils;
 import static org.junit.Assert.assertEquals;
 
 /**

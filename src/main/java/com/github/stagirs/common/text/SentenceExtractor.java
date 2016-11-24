@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.smivle.common.text;
+package com.github.stagirs.common.text;
 
 import java.util.ArrayList;
 import java.util.List;

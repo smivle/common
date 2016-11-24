@@ -13,34 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.smivle.common.model;
+package com.github.stagirs.common.model.doc;
 
-import com.github.smivle.common.HashUtils;
-import java.io.File;
-import java.io.IOException;
-import org.apache.commons.io.FileUtils;
+import com.github.stagirs.common.HashUtils;
 
 /**
- * 
+ *
  * @author Dmitriy Malakhov
  */
-public class Document {
-    private long hash;
-    private String text;
+public abstract class Item {
+    private Long hash;
+    public abstract String text();
 
     public long getHash() {
+        if(hash == null){
+            hash = HashUtils.hash(text());
+        }
         return hash;
-    }
-
-    public String getText() {
-        return text;
     }
 
     public void setHash(long hash) {
         this.hash = hash;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    @Override
+    public String toString() {
+        return text();
     }
+    
+    
 }
