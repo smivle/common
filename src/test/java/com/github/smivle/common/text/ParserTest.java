@@ -21,20 +21,34 @@ import org.junit.Test;
  * Created by Vladimir on 04.12.2016.
  */
 public class ParserTest {
+    public Integer amountOfFiles = 0;
     @Test
     public void test() throws IOException {
         String diskPath = "../docs/MAGAZINE_IZV_Vuzov/";
-        String folders1 = "collection/1997/12/";
-        String folders2 = "collection-udk/518/";
-        String folders = folders1;
-        String path = diskPath + folders;
-        File dir = new File(path);
 
-        DirTree(new File(diskPath));
+        String saveDir = "../docs/";
+        String json = ".json";
+        File storeFile = new File(saveDir + "parsed" + json);
+
+        DirTree(new File(diskPath), new Store(storeFile));
         System.out.println("Done!");
+        System.out.println(amountOfFiles + " files parsed.");
+
+        iteratorCheck(storeFile);
     }
 
-    public void Parse(File file) throws IOException{
+    public void iteratorCheck(File path){
+        StoreIterator itr = new StoreIterator(path,Document.class);
+        Integer counter = 0;
+        while(itr.hasNext()){
+            counter++;
+            //System.out.println(counter + " of " + amountOfFiles);
+            Object obj = itr.next();
+        }
+        System.out.println("Iterated through " +counter + " Documents");
+    }
+
+    public void Parse(File file, Store store) throws IOException{
 
         //System.out.println("Parsing" + file.getName());
 
@@ -158,40 +172,27 @@ public class ParserTest {
         if (pointText != null && currentSection != null) {
             currentSection.getPoints().add(getPoint(pointText));
         }
-
-        String saveDir = "../docs/json/MAGAZINE_IZV_Vuzov/";
-        String json = ".json";
-        File storeFile = new File(saveDir + file.getName() + json);
-        //File filepath = new File(path + file.getName());
-        Store store = new Store(storeFile);
-
+        amountOfFiles++;
         store.save(doc);
-
-
-        //StoreIterator itr = new StoreIterator(filepath,doc.getClass());
-
-        //itr.
-
-        //System.out.println(file.getName() + " successfully parsed");
     }
 
     public Point getPoint(StringBuilder pointText){
         return new Point(SentenceExtractor.get().extract(TextUtils.charactersClutch(pointText.toString()).replaceAll("\\s+", " ")));
     }
 
-    public  void DirTree(File node) throws IOException{
+    public  void DirTree(File node, Store store) throws IOException{
         if (node.isDirectory()) {
             System.out.println("Entering " + node.getPath() + " folder.");
 
             String[] subNote = node.list();
             for (String filename : subNote) {
-                DirTree(new File(node, filename));
+                DirTree(new File(node, filename), store);
             }
         }
         else{
             if (node.getName().matches("\\d*-\\d*-*\\d*.(TEX|tex)")) {
                 //System.out.println(node.getPath());
-                Parse(node);
+                Parse(node,store);
             }
         }
     }
