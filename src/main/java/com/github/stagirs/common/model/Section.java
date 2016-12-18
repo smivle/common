@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.stagirs.common.model.doc;
+package com.github.stagirs.common.model;
 
-import com.github.stagirs.common.model.Tag;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,42 +22,18 @@ import java.util.List;
  *
  * @author Dmitriy Malakhov
  */
-public class Section extends Item{
-    protected String title;
-    protected List<Point> points;
+public class Section extends Block{
 
-    public Section() {
-    }
-
-    public Section(String title) {
-        this.title = title;
-        this.points = new ArrayList<>();
-    }
+    private List<Block> blocks = new ArrayList<>();
+    private String title;
     
-    @Override
-    public String text() {
-        if(points == null){
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        if(title != null){
-            sb.append(title);
-        }
-        for (Item section : points) {
-            sb.append(section);
-        }
-        return sb.toString();
+    public Section(String className) {
+        super(className);
     }
 
-    public List<Point> getPoints() {
-        return points;
+    public List<Block> getBlocks() {
+        return blocks;
     }
-
-    public void setPoints(List<Point> points) {
-        this.points = points;
-    }
-
-    
 
     public String getTitle() {
         return title;
@@ -67,4 +42,6 @@ public class Section extends Item{
     public void setTitle(String title) {
         this.title = title;
     }
+    
+    
 }

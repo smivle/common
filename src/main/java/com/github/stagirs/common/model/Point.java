@@ -13,43 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.stagirs.common.model.doc;
+package com.github.stagirs.common.model;
 
-import com.github.stagirs.common.HashUtils;
-import com.github.stagirs.common.model.Tag;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Dmitriy Malakhov
  */
-public class Point extends Item{
-    protected List<String> sentences;
-
-    public Point() {
-    }
-
-    public Point(List<String> list) {
-        this.sentences = list;
-    }
+public class Point extends Block{
+    private int number;
     
-    @Override
-    public String text() {
-        if(sentences == null){
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        for (String section : sentences) {
-            sb.append(section);
-        }
-        return sb.toString();
+    private List<Sentence> sentences = new ArrayList<>();
+
+    public Point(int number, String className) {
+        super(className);
+        this.number = number;
     }
 
-    public List<String> getSentences() {
+    public List<Sentence> getSentences() {
         return sentences;
     }
 
-    public void setSentences(List<String> sentences) {
+    public void setSentences(List<Sentence> sentences) {
         this.sentences = sentences;
     }
+
+    public int getNumber() {
+        return number;
+    }
+    
+    
 }

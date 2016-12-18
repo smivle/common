@@ -13,33 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.stagirs.common.model.doc;
+package com.github.stagirs.common.model;
 
-import com.github.stagirs.common.HashUtils;
 
 /**
  *
  * @author Dmitriy Malakhov
  */
-public abstract class Item {
-    private Long hash;
-    public abstract String text();
+public class Block {
+    private String className;
 
-    public long getHash() {
-        if(hash == null){
-            hash = HashUtils.hash(text());
-        }
-        return hash;
+    public Block(String className) {
+        this.className = className;
     }
 
-    public void setHash(long hash) {
-        this.hash = hash;
+    public String getClassName() {
+        return className;
     }
 
-    @Override
-    public String toString() {
-        return text();
-    }
-    
-    
 }

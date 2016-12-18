@@ -13,31 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.stagirs.common;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
-import org.apache.commons.io.FileUtils;
+package com.github.stagirs.common.model;
 
 /**
  *
  * @author Dmitriy Malakhov
  */
-public class Store<T> {
-    private File file;
-    private ObjectMapper om = new ObjectMapper();
+public class Text {
+    private StringBuilder text;
+    private String className;
 
-    public Store(File file) {
-        file.delete();
-        this.file = file;
+    public Text(String className, String text) {
+        this.className = className;
+        this.text = new StringBuilder(text);
+    }
+
+    public String getText() {
+        return text.toString();
+    }
+
+    public void append(char c){
+        text.append(c);
+    }
+
+    public void append(String c){
+        text.append(c);
     }
     
-    public void save(T item){
-        try {
-            FileUtils.writeStringToFile(file, om.writeValueAsString(item) + "\n", "utf-8", true);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+    public String getClassName() {
+        return className;
     }
+    
+    
 }
