@@ -32,7 +32,7 @@ public class DocumentSerializer {
     
     public static void serialize(StringBuilder sb, Document document) throws IOException{
         if(document.getTitle() != null){
-            sb.append("<div class='title'>").append(document.getTitle()).append("</div>");
+            sb.append("<div class='title' semantic='").append(document.getTitleSemantic()).append("'>").append(document.getTitle()).append("</div>");
         }
         if(document.getAuthor() != null){
             sb.append("<div class='author'>").append(document.getAuthor()).append("</div>");
@@ -58,7 +58,7 @@ public class DocumentSerializer {
     
     public static void serialize(StringBuilder sb, Section section){
         sb.append("<div class='section'>")
-                    .append("<div class='section-title'>").append(section.getTitle()).append("</div>");
+                    .append("<div class='section-title'semantic='").append(section.getTitleSemantic()).append("'>").append(section.getTitle()).append("</div>");
         for (Block block : section.getBlocks()) {
             if(block instanceof Point){
                 serialize(sb, (Point) block);

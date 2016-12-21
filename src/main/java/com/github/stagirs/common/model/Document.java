@@ -101,8 +101,10 @@ public class Document {
         return titleSemantic;
     }
 
-    public void setTitleSemantic(double titleSemantic) {
-        this.titleSemantic = titleSemantic;
+    public void setTitleSemantic(double semantic) {
+        int s = (int) (semantic * 1000);
+        semantic = s > 0  ? s : 1;
+        this.titleSemantic = semantic / 1000;
     }
     
     

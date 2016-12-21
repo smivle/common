@@ -20,7 +20,7 @@ package com.github.stagirs.common.model;
  *
  * @author Dmitriy Malakhov
  */
-public class Block {
+public abstract class Block {
     private String className;
 
     public Block(String className) {
@@ -30,5 +30,8 @@ public class Block {
     public String getClassName() {
         return className;
     }
-
+    
+    public abstract boolean isPoint();
+    
+    public abstract boolean isSection();
 }

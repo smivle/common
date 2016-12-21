@@ -50,14 +50,25 @@ public class Section extends Block{
         return titleSemantic;
     }
 
-    public void setTitleSemantic(double titleSemantic) {
-        this.titleSemantic = titleSemantic;
+    public void setTitleSemantic(double semantic) {
+        int s = (int) (semantic * 1000);
+        semantic = s > 0  ? s : 1;
+        this.titleSemantic = semantic / 1000;
     }
 
     public String getDocId() {
         return docId;
     }
     
+    @Override
+    public boolean isPoint() {
+        return false;
+    }
+
+    @Override
+    public boolean isSection() {
+        return true;
+    }
     
     
     

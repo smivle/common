@@ -58,7 +58,9 @@ public class DocumentParser {
                 doc.getBlocks().add(parsePoint(doc.getId(), item, list));
                 continue;
             }
-            if(item.equals("<div class='title'>")){
+            if(item.startsWith("<div class='title' ")){
+                item = item.split("semantic='")[1];
+                doc.setTitleSemantic(Double.parseDouble(item.substring(0, item.indexOf("'"))));
                 doc.setTitle(list.next());
                 list.next();
                 continue;
@@ -94,7 +96,9 @@ public class DocumentParser {
             if(item.equals("</div>")){
                 return section;
             }
-            if(item.equals("<div class='section-title'>")){
+            if(item.startsWith("<div class='section-title' ")){
+                item = item.split("semantic='")[1];
+                section.setTitleSemantic(Double.parseDouble(item.substring(0, item.indexOf("'"))));
                 section.setTitle(list.next());
                 list.next();
                 continue;

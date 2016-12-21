@@ -33,6 +33,7 @@ public class Sentence {
         this.number = number;
         this.pointNumber = pointNumber;
         this.docId = docId;
+        this.semantic = semantic;
     }
 
     public List<Text> getParts() {

@@ -49,6 +49,16 @@ public class Point extends Block{
     public String getDocId() {
         return docId;
     }
+
+    @Override
+    public boolean isPoint() {
+        return true;
+    }
+
+    @Override
+    public boolean isSection() {
+        return false;
+    }
     
     
 }
