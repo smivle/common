@@ -26,9 +26,12 @@ public class Section extends Block{
 
     private List<Block> blocks = new ArrayList<>();
     private String title;
+    private String docId;
+    private double titleSemantic;
     
-    public Section(String className) {
+    public Section(String docId, String className) {
         super(className);
+        this.docId = docId;
     }
 
     public List<Block> getBlocks() {
@@ -42,6 +45,20 @@ public class Section extends Block{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public double getTitleSemantic() {
+        return titleSemantic;
+    }
+
+    public void setTitleSemantic(double titleSemantic) {
+        this.titleSemantic = titleSemantic;
+    }
+
+    public String getDocId() {
+        return docId;
+    }
+    
+    
     
     
 }

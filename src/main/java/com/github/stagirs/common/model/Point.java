@@ -24,12 +24,14 @@ import java.util.List;
  */
 public class Point extends Block{
     private int number;
+    private String docId;
     
     private List<Sentence> sentences = new ArrayList<>();
 
-    public Point(int number, String className) {
+    public Point(String docId, int number, String className) {
         super(className);
         this.number = number;
+        this.docId = docId;
     }
 
     public List<Sentence> getSentences() {
@@ -42,6 +44,10 @@ public class Point extends Block{
 
     public int getNumber() {
         return number;
+    }
+
+    public String getDocId() {
+        return docId;
     }
     
     

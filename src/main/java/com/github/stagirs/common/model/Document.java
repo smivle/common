@@ -25,6 +25,7 @@ import java.util.List;
 public class Document {
     private String id;
     private String title;
+    private double titleSemantic;
     private String author;
     private String classifier;
     private String thanks;
@@ -95,6 +96,16 @@ public class Document {
     public void setThanks(String thanks) {
         this.thanks = thanks;
     }
+
+    public double getTitleSemantic() {
+        return titleSemantic;
+    }
+
+    public void setTitleSemantic(double titleSemantic) {
+        this.titleSemantic = titleSemantic;
+    }
+    
+    
     
     
 }

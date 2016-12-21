@@ -51,11 +51,11 @@ public class DocumentParser {
         while(list.hasNext()){
             String item = list.next();
             if(item.equals("<div class='section'>")){
-                doc.getBlocks().add(parseSection(item, list));
+                doc.getBlocks().add(parseSection(doc.getId(), item, list));
                 continue;
             }
             if(item.startsWith("<p")){
-                doc.getBlocks().add(parsePoint(item, list));
+                doc.getBlocks().add(parsePoint(doc.getId(), item, list));
                 continue;
             }
             if(item.equals("<div class='title'>")){
@@ -87,8 +87,8 @@ public class DocumentParser {
         return doc;
     }
     
-    public static Section parseSection(String item, Iterator<String> list){
-        Section section = new Section(null);
+    public static Section parseSection(String docId, String item, Iterator<String> list){
+        Section section = new Section(docId, null);
         while(list.hasNext()){
             item = list.next();
             if(item.equals("</div>")){
@@ -100,33 +100,33 @@ public class DocumentParser {
                 continue;
             }
             if(item.equals("<div class='section'>")){
-                section.getBlocks().add(parseSection(item, list));
+                section.getBlocks().add(parseSection(docId, item, list));
                 continue;
             }
             if(item.startsWith("<p")){
-                section.getBlocks().add(parsePoint(item, list));
+                section.getBlocks().add(parsePoint(docId, item, list));
                 continue;
             }
         }    
         throw new RuntimeException("can't find </div>");
     }
     
-    public static Point parsePoint(String item, Iterator<String> list){
+    public static Point parsePoint(String docId, String item, Iterator<String> list){
         String[] parts = item.split("'");
-        Point point = new Point(parseInt(parts[1]), parts.length > 3 ? parts[3] : null);
+        Point point = new Point(docId, parseInt(parts[1]), parts.length > 3 ? parts[3] : null);
         while(list.hasNext()){
             item = list.next();
             if(item.equals("</p>")){
                 return point;
             }
-            point.getSentences().add(parseSentence(item, list));
+            point.getSentences().add(parseSentence(docId, point.getNumber(), item, list));
         }    
         throw new RuntimeException("can't find </p>");
     }
     
-    public static Sentence parseSentence(String item, Iterator<String> list){
+    public static Sentence parseSentence(String docId, int pointNumber, String item, Iterator<String> list){
         String[] parts = item.split("'");
-        Sentence sentence = new Sentence(parseInt(parts[1]), parseDouble(parts[3]));
+        Sentence sentence = new Sentence(docId, pointNumber, parseInt(parts[1]), parseDouble(parts[3]));
         while(list.hasNext()){
             item = list.next();
             if(item.equals("</span>")){

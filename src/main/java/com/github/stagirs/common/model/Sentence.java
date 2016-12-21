@@ -25,10 +25,14 @@ import java.util.List;
 public class Sentence {
     private int number;
     private double semantic;
+    private int pointNumber;
+    private String docId;
     private List<Text> parts = new ArrayList<>();
     
-    public Sentence(int number, double semantic) {
+    public Sentence(String docId, int pointNumber, int number, double semantic) {
         this.number = number;
+        this.pointNumber = pointNumber;
+        this.docId = docId;
     }
 
     public List<Text> getParts() {
@@ -51,6 +55,14 @@ public class Sentence {
         int s = (int) (semantic * 1000);
         semantic = s > 0  ? s : 1;
         this.semantic = semantic / 1000;
+    }
+
+    public String getDocId() {
+        return docId;
+    }
+
+    public int getPointNumber() {
+        return pointNumber;
     }
     
     

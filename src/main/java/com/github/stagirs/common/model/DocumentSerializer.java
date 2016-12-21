@@ -26,6 +26,11 @@ import org.apache.commons.io.FileUtils;
 public class DocumentSerializer {
     public static void serialize(File file, Document document) throws IOException{
         StringBuilder sb = new StringBuilder();
+        serialize(sb, document);
+        FileUtils.writeStringToFile(new File(file, document.getId()), sb.toString(), "utf-8");
+    }
+    
+    public static void serialize(StringBuilder sb, Document document) throws IOException{
         if(document.getTitle() != null){
             sb.append("<div class='title'>").append(document.getTitle()).append("</div>");
         }
@@ -49,10 +54,9 @@ public class DocumentSerializer {
                 serialize(sb, (Section) block);
             }
         }
-        FileUtils.writeStringToFile(new File(file, document.getId()), sb.toString(), "utf-8");
     }
     
-    private static void serialize(StringBuilder sb, Section section){
+    public static void serialize(StringBuilder sb, Section section){
         sb.append("<div class='section'>")
                     .append("<div class='section-title'>").append(section.getTitle()).append("</div>");
         for (Block block : section.getBlocks()) {
@@ -66,7 +70,7 @@ public class DocumentSerializer {
         sb.append("</div>");
     }
     
-    private static void serialize(StringBuilder sb, Point point){
+    public static void serialize(StringBuilder sb, Point point){
         if(point.getClassName() != null){
             sb.append("<p pos='").append(point.getNumber()).append("' class='").append(point.getClassName()).append("'>");
         }else{
@@ -78,7 +82,7 @@ public class DocumentSerializer {
         sb.append("</p>");
     }
     
-    private static void serialize(StringBuilder sb, Sentence sentence){
+    public static void serialize(StringBuilder sb, Sentence sentence){
         sb.append("<span pos='").append(sentence.getNumber()).append("' semantic='").append(sentence.getSemantic()).append("' class='sentence'>");
         for (Text text : sentence.getParts()) {
             if(text.getClassName() != null){
