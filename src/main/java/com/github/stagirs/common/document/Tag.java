@@ -23,13 +23,23 @@ import org.apache.commons.lang.StringUtils;
  */
 public class Tag {
     private String[] words;
-    private int semantic;
+    private float semantic;
 
-    public int getSemantic() {
+    public Tag() {
+    }
+
+    public Tag(String[] words, int semantic) {
+        this.words = words;
+        this.semantic = semantic;
+    }
+    
+    
+
+    public float getSemantic() {
         return semantic;
     }
 
-    public void setSemantic(int semantic) {
+    public void setSemantic(float semantic) {
         this.semantic = semantic;
     }
 
@@ -43,7 +53,7 @@ public class Tag {
 
     @Override
     public String toString() {
-        return StringUtils.join(words, " ");
+        return StringUtils.join(words, " ") + ": " + semantic;
     }
     
     

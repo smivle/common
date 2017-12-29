@@ -24,20 +24,21 @@ import java.util.List;
  */
 public class SentenceExtractor {
     
-    public List<String> extract(String text){
+    public static List<String> extract(String text){
         text = text.replaceAll("([А-Я])", ". $1");
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
         int curIndex = text.indexOf(".");
         int lastSentenceIndex = 0;
         while(curIndex > -1){
-            int lastWordSize = getLastWordSize(text, curIndex);
+            int predWordSize = getPredWordSize(text, curIndex);
+            int nextWordSize = getNextWordSize(text, curIndex);
             int firstLetterPos = curIndex;
             while(firstLetterPos < text.length() && !Character.isLetter(text.charAt(firstLetterPos))){
                 firstLetterPos++;
             }
-            if(firstLetterPos >= text.length() || Character.isUpperCase(text.charAt(firstLetterPos)) && lastWordSize > 2){
+            if(firstLetterPos >= text.length() || Character.isUpperCase(text.charAt(firstLetterPos)) && predWordSize > 2 && nextWordSize > 2){
                 String sentence = text.substring(lastSentenceIndex, curIndex + 1);
-                if(sentence.length() > 0 && getLastWordSize(sentence, sentence.length() - 1) > 0){
+                if(sentence.length() > 0 && getPredWordSize(sentence, sentence.length() - 1) > 0){
                     list.add(sentence);
                 }
                 lastSentenceIndex = curIndex + 1;
@@ -51,19 +52,27 @@ public class SentenceExtractor {
         return list;
     }
     
-    private int getLastWordSize(String text, int curIndex){
-        int lastWordSize = 0;
+    private static int getPredWordSize(String text, int curIndex){
+        int wordSize = 0;
         while(curIndex >= 0 &&!Character.isAlphabetic(text.charAt(curIndex))){
             curIndex--;
         }
         while(curIndex >= 0 && Character.isAlphabetic(text.charAt(curIndex))){
             curIndex--;
-            lastWordSize++;
+            wordSize++;
         }
-        return lastWordSize;
+        return wordSize;
     }
     
-    public static SentenceExtractor get(){
-        return new SentenceExtractor();
+    private static int getNextWordSize(String text, int curIndex){
+        int wordSize = 0;
+        while(curIndex < text.length() &&!Character.isAlphabetic(text.charAt(curIndex))){
+            curIndex++;
+        }
+        while(curIndex < text.length() && Character.isAlphabetic(text.charAt(curIndex))){
+            curIndex++;
+            wordSize++;
+        }
+        return wordSize;
     }
 }

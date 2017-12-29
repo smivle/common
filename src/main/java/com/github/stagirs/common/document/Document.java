@@ -26,15 +26,14 @@ import java.util.Map;
  */
 public class Document {
     private String id;
-    private String title;
     private String author;
     private String annotation;
     private String notes;
     private String output;
     private int importance;
-    private List<Tag> tags = new ArrayList<>();
-    private List<Point> points = new ArrayList<>();
-    private Map<String, String> classifiers = new HashMap<>();
+    private List<Tag> tags = new ArrayList<Tag>();
+    private List<Point> points = new ArrayList<Point>();
+    private Map<String, String> classifiers = new HashMap<String, String>();
     
     /**
      * @return уникальный идентификатор документа
@@ -56,16 +55,6 @@ public class Document {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
-    }
-    /**
-     * @return заголовок документа
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
     /**
      * @return информация об авторе

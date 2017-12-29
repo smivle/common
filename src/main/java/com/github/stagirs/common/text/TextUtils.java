@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class TextUtils {
     public static List<String> splitWords(String text, boolean toLowerCase){
-        List<String> words = new ArrayList<>();
+        List<String> words = new ArrayList<String>();
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             if(Character.isAlphabetic(text.charAt(i))){

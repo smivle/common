@@ -32,7 +32,7 @@ public class Document {
     private String output;
     
     
-    private List<Block> blocks = new ArrayList<>();
+    private List<Block> blocks = new ArrayList<Block>();
 
     public String getAuthor() {
         return author;

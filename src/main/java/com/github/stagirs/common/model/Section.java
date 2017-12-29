@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class Section extends Block{
 
-    private List<Block> blocks = new ArrayList<>();
+    private List<Block> blocks = new ArrayList<Block>();
     private String title;
     private String docId;
     private double titleSemantic;

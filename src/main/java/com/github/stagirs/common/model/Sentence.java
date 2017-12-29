@@ -27,7 +27,7 @@ public class Sentence {
     private double semantic;
     private int pointNumber;
     private String docId;
-    private List<Text> parts = new ArrayList<>();
+    private List<Text> parts = new ArrayList<Text>();
     
     public Sentence(String docId, int pointNumber, int number, double semantic) {
         this.number = number;

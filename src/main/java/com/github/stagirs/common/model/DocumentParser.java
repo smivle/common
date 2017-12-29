@@ -31,7 +31,7 @@ import org.apache.commons.io.FileUtils;
 public class DocumentParser {
     
     private static List<String> split(String str){
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
         while(str.contains("<")){
             if(str.indexOf("<") > 0){
                 list.add(str.substring(0, str.indexOf("<")));

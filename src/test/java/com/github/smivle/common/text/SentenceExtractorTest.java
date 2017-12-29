@@ -13,8 +13,8 @@ public class SentenceExtractorTest {
     
     @Test
     public void extractTest(){
-        SentenceExtractor tp = SentenceExtractor.get();
-        List<String> list = tp.extract("общая психология \nАвтореферат \nдиооѳртации М В Ломоносов");
-        assertEquals(list.size(), 3);
+        List<String> list = SentenceExtractor.extract("общая психология \nАвтореферат \nдиооѳртации М В Ломоносов");
+        assertEquals(list.get(0), "общая психология \n.");
+        assertEquals(list.get(1), "Автореферат \nдиооѳртации . М . В . Ломоносов");
     }
 }

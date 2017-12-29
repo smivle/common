@@ -26,7 +26,7 @@ public class Point extends Block{
     private int number;
     private String docId;
     
-    private List<Sentence> sentences = new ArrayList<>();
+    private List<Sentence> sentences = new ArrayList<Sentence>();
 
     public Point(String docId, int number, String className) {
         super(className);

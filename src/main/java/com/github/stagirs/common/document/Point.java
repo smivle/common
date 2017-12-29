@@ -24,9 +24,19 @@ import java.util.List;
  */
 public class Point {
     private int level;
-    private String title;
+    private boolean title;
     private String text;
-    private List<Tag> tags = new ArrayList<>();
+    private Tag[] tags;
+
+    public Point() {
+    }
+
+    public Point(int level, boolean title, String text) {
+        this.level = level;
+        this.title = title;
+        this.text = text;
+    }
+    
     /**
      * У документа могут быть вложенные друг в друга разделы. Уровень вложенности определяет сколько родительских разделов имеет абзац.
      * @return уровень вложенности, на котором находится абзац
@@ -38,15 +48,12 @@ public class Point {
     public void setLevel(int level) {
         this.level = level;
     }
-    /**
-     * Если абзац идет первым в разделе с заголовком, то этот заголовок приписывается к этому абзацу
-     * @return заголовок абзаца
-     */
-    public String getTitle() {
+
+    public boolean isTitle() {
         return title;
     }
-
-    public void setTitle(String title) {
+    
+    public void setTitle(boolean title) {
         this.title = title;
     }
     /**
@@ -62,17 +69,17 @@ public class Point {
     /**
      * @return тэги выделенные в абзаце
      */
-    public List<Tag> getTags() {
-        return tags;
+    public void setTags(Tag[] tags) {
+        this.tags = tags;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public Tag[] getTags() {
+        return tags;
     }
 
     @Override
     public String toString() {
-        return text;
+        return (title ? level : "") + "\t" + text.trim();
     }
     
     
